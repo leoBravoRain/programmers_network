@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import Home from "./components/home.component";
+import Home from "./screens/home.screen";
+import Login from "./screens/login.screen";
+
+import CssBaseline from '@material-ui/core/CssBaseline';
 // import Piece_of_Ground_Map from "./components/piece_of_ground_map.component";
 // import Contact from './components/contact.component';
 // import Questions_Answers from './components/questions_answers.component';
@@ -18,43 +21,45 @@ class App extends Component {
 
     return (
 
-      <Router>
+      <React.Fragment>
 
-        <div className="container">
+        <CssBaseline />
 
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <Router>
 
-            <Link to="/" className="navbar-brand"> 
+          <div className="container">
 
-              Programmers Social Network
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
 
-            </Link>
+              <Link to="/" className="navbar-brand"> 
 
-            <div className="collpase navbar-collapse">
+                Programmers Social Network
 
-              <ul className="navbar-nav mr-auto">
+              </Link>
 
-                <li className="navbar-item">
+              <div className="collpase navbar-collapse">
 
-                  <Link to="/" className="nav-link">
+                <ul className="navbar-nav mr-auto">
 
-                    Home
+                  <li className="navbar-item">
 
-                  </Link>
+                  
+                  </li>
 
-                </li>
+                </ul>
 
-              </ul>
+              </div>
 
-            </div>
+            </nav>
 
-          </nav>
+          </div>
 
-        </div>
+          <Route path = "/" exact component = {Login} />
+          <Route path = "/home" exact component = {Home} />
 
-        <Route path = "/" exact component = {Home} />
+        </Router>
 
-      </Router>
+      </React.Fragment>
 
     );
 
