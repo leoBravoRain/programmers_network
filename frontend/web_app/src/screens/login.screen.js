@@ -4,6 +4,14 @@ import React, { Component } from "react";
 // import {fs, st} from "../config/firebase";
 // import icons_users from "constants";
 
+// material ui
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+// import { spacing } from '@material-ui/system';
+// import Icon from '@material-ui/core/Icon';
+
 export default class Login extends Component {
 
 	// constructor
@@ -36,31 +44,64 @@ export default class Login extends Component {
 
 		return (
 
-			<div className = "container">
+			<Grid 
+				container
+				// maxWidth="m" 
+				style = {{margin: 20, textAlign: 'center'}}
+				alignItems="center"
+			 	justify="center"
 
-				<h4>
+
+			>
+
+				<Typography gutterBottom variant="h5" component="h2">
 
 					Welcome to the programmer's social network!
 
-				</h4>
+				</Typography>
 
-				<div className = "container">
+				<Grid 
+					container
+					alignItems="center"
+				 	justify="center"
+				 	// spacing={100}
+				>
 
-					Here you can share all your achievments, doubts or ideas with all the comunity of programmers, getting the best feedback from them! Happy codding!
+					<img 
+						src = {require("../statics/images/logo.png")}
+						height = "150"
+						width = "auto"
+						// align="middle"
+						style = {{
+							align: "right",
+							// borderRadius: 1000,
+						}}
+					/>
 
-				</div>
+				</Grid>
 
-				<p className = 'container'> 
+				<Typography variant="body2" color="textSecondary" component="p" style = {{padding: 10}}>
 
-					<button className="btn btn-primary m-3" type = "button" onClick={this.handle_login}>
+					Here you can share all your achievements, doubts or ideas with all the community of programmers, getting the best feedback from them! Happy coding!
 
-						I am a programmer
+				</Typography>
 
-					</button>
+				<Grid
+					container
+					// container
+					alignItems="center"
+				 	justify="center"
+				>
 
-              	</p>
+				<Button variant="contained" color="primary" onClick={this.handle_login}>
 
-			</div>
+			        I am a programmer
+
+		      	</Button>
+
+		      	</Grid>
+
+			</Grid>
 
 		);
 

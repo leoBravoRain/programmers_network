@@ -2,6 +2,15 @@ import React, { Component } from "react";
 // import {fs, st} from "../config/firebase";
 // import icons_users from "constants";
 
+// material ui
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
+
 export default class Comment_on_Post extends Component {
 
 	render() {
@@ -10,23 +19,37 @@ export default class Comment_on_Post extends Component {
 
 		return (
 
-			<div className="media border border-left-0 border-right-0 p-1">
+			<Container style = {{margin: 10}}>
 
-				<img width="30" height="30" src = {comment.user_image}  className="mr-3" alt="user image"/>
+				<Grid container spacing={3}>
 
-				<div className="media-body ">
+					<Grid item xs={1}>
 
-					<h5 className ="mt-0">
+						<img width="30" height="30" src = {comment.user_image} alt="user image"/>
 
-						{comment.user}
+					</Grid>
 
-					</h5>
+					<Grid item xs={11}>
+
+						<Typography gutterBottom variant="h6" component="h6">
+
+							{comment.user}
+
+						</Typography>
+
+					</Grid>
+
+				</Grid>
+
+				<Typography variant="body2" color="textSecondary" component="p" style = {{padding: 10, fontSize: 14}}>
 
 					{comment.user_comment}
 
-				</div>
+				</Typography>
 
-			</div>
+				<Divider variant="middle" />
+
+			</Container>
 
 		);
 

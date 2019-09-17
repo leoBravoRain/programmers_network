@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import {fs, st} from "../config/firebase";
-import icons_users from "constants";
+import {icons_users} from "../constants";
+
+// mateiral ui
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default class New_Post extends Component{
 
@@ -13,14 +21,19 @@ export default class New_Post extends Component{
 		// initial states
 		this.state = {
 
-			post: "",
+			post: null,
 			photo: null,
+			user_name: null,
+			loading: false,
 			// comments: [],
 
 		}
 
+		console.log(this.props);
+
 		this.on_change_post = this.on_change_post.bind(this);
 		this.on_submit_post = this.on_submit_post.bind(this);
+		this.on_change_user_name = this.on_change_user_name.bind(this);
 
 	}
 
@@ -28,50 +41,106 @@ export default class New_Post extends Component{
 	on_submit_post(event){
 
 		event.preventDefault();
-		
+
 		const selectedFile = document.getElementById('file_input').files[0];
 
-		// Create a root reference
-		var storageRef = st.ref('posts/' + selectedFile.name);
+		// console.log(this.state.user_name);
 
-		// store file in firebase store
-		storageRef.put(selectedFile).then(snapshot => {
+		// validate if there is a post
+		if(this.state.post != null) {
 
-			// get url of fiile
-       		return snapshot.ref.getDownloadURL();
+			// if user name 
+			if(this.state.user_name != null){
 
-		})
+				// if file is not null
+				if(selectedFile) {
 
-		// if it's ok
-		.then(downloadURL => {
+					// set flag loading to true
+					this.setState({loading: true});
 
-			// console.log(`Successfully uploaded file and got download link - ${downloadURL}`);
+					// Create a root reference
+					var storageRef = st.ref('posts/' + selectedFile.name);
 
-			// add data to database
-			fs.collection('posts').add({
+					// store file in firebase store
+					storageRef.put(selectedFile).then(snapshot => {
 
-				user_comment: this.state.post,
-				comments: [],
-				user_image: icons_users[parseInt(Math.random()*icons_users.length)],
+						// get url of fiile
+			       		return snapshot.ref.getDownloadURL();
 
-				// add url of image
-				image: downloadURL,				
+					})
 
-			}).then( ref => {
+					// if it's ok
+					.then(downloadURL => {
 
-				// console.log("Added document with ID: ", ref.id)
+						console.log(`Successfully uploaded file and got download link - ${downloadURL}`);
 
-				// reload page
-				window.location.reload();
+						// add data to database
+						fs.collection('posts').add({
 
-			})
-		})
+							user: this.state.user_name,
+							user_comment: this.state.post,
+							comments: [],
+							user_image: icons_users[parseInt(Math.random()*icons_users.length)],
 
-		.catch(error => {
+							// add url of image
+							image: downloadURL,				
 
-			// Use to signal error if something goes wrong.
-			console.log(`Failed to upload file and get link - ${error}`);
-		});
+						}).then( ref => {
+
+							console.log("Added document with ID: ", ref.id)
+
+							// reload page
+							// window.location.reload();
+
+							// console.log(this);
+
+							// this.context.router.history.push(`/home`)
+							console.log(window.location.host);
+							window.location.reload();
+							// window.location.assign(window.location.host);
+
+							// return(
+
+							// 	<Link to = "/"/>
+
+							// );
+
+						})
+
+					})
+
+					.catch(error => {
+
+						// Use to signal error if something goes wrong.
+						console.log(`Failed to upload file and get link - ${error}`);
+
+					});
+
+				}
+
+				else {
+
+					alert("Ups, It's like you did not add an image in the post, please, add one!")
+
+				}
+
+			}
+
+			// if not user name
+			else {
+
+				alert("Ups, It's like you did not write your name in the post, please, write something!")
+
+			}
+
+		}
+
+		// if post is empty
+		else {
+
+			alert("Ups, It's like you did not write anything in the post, please, write something!")
+
+		}
 
 	}
 
@@ -86,53 +155,94 @@ export default class New_Post extends Component{
 
 	}
 
+	// if text on new post have changed
+	on_change_user_name(event) {
+
+		this.setState({
+
+			user_name: event.target.value,
+
+		})
+
+	}
+
 	render() {
 
 		return (
 
-			<div className = "container border shadow-sm my-3">
+			<Container maxWidth = "xl" style={{position: 'relative'}}>
 
-				<h4>
+				{this.state.loading 
 
-					Add new post
-				</h4>
+					?
+						<CircularProgress size = {80} style = {{margin: 30, marginLeft: "50%"}}/>
+					:
 
-				<form onSubmit = {this.on_submit_post}>
+						<Paper style = {{padding: 20, margin: 30}}>
 
-	                <div className="form-group"> 
+							<Typography gutterBottom variant="h5" component="h2">
 
-	                    <label> Post: </label>
+								Add new post
 
-	                    <textarea  type="text"
-	                            className="form-control"
-	                            value={this.state.post}
-	                            onChange={this.on_change_post}
-	                            />
+							</Typography>
 
-	                </div>
-	            	
-	            	<div className="form-group"> 
+							<form onSubmit = {this.on_submit_post}>
 
-	                    <label> Add photo: </label>
+								<TextField 
+									placeholder = "What are you coding?" 
+									fullWidth
+									multiline
+									rowsMax = "4"
+									label = "Post here"
+									style={{ margin: 8 }}
+									variant="outlined"
+									margin = 'normal'
+									onChange = {this.on_change_post}
+									value = {this.state.post}
+								/>
 
-		            	<input 
-		            		id = "file_input"
-		            		type="file"
-	        	       		name="agregar foto"
-	        	       		className = "form-control p-1"
-	            	       	accept="image/png, image/jpeg"
-            	       	/>
-	    	       	</div>
+								<TextField 
+									placeholder = "What's your name?" 
+									fullWidth
+									label = "Your name"
+									style={{ margin: 8 }}
+									variant="outlined"
+									margin = 'normal'
+									onChange = {this.on_change_user_name}
+									value = {this.state.user_name}
+								/>
 
-	                <div className="form-group ">
+				            	<Container> 
 
-	                    <input type="submit" value="Post" className="btn btn-primary " />
+				            		<Typography variant="caption" component="p">
 
-	                </div>
+				            			Add photo
 
-	            </form>
+				            		</Typography>
 
-	        </div>
+					            	<input 
+					            		style = {{margin: 10}}
+					            		id = "file_input"
+					            		type="file"
+				        	       		name="agregar foto"
+				        	       		className = "form-control p-1"
+				            	       	accept="image/png, image/jpeg"
+			            	       	/>
+
+				    	       	</Container>
+
+			    	       		<Button variant="contained" color="primary" type = "submit">
+
+			    	       			Post
+
+			    	       		</Button>
+
+				            </form>
+
+				        </Paper>
+				}
+
+	        </Container>
 
 			)
 

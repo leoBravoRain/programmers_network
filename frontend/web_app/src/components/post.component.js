@@ -1,9 +1,19 @@
 import React, { Component } from "react";
 import {fs, st} from "../config/firebase";
-import icons_users from "constants";
+import { icons_users } from "../constants";
 import firebase from "firebase";
 import "firebase/firestore";
 import Comment_on_Post from "./comment_on_post.component";
+
+// material ui
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 export default class Post extends Component {
 
@@ -16,7 +26,8 @@ export default class Post extends Component {
 		// initial states
 		this.state = {
 
-			comment_to_add: "",
+			comment_to_add: null,
+			user_name_comment: null,
 			// photo: null,
 			// comments: [],
 
@@ -30,31 +41,55 @@ export default class Post extends Component {
 
 		// console.log(document_id);
 
-		// update({
-		//   regions: admin.firestore.FieldValue.arrayUnion('greater_virginia')
-		// });
-
 		// console.log(this.state.comment_to_add);
 
-		const comment = {
+		// console.log(icons_users);
 
-			user_image: icons_users[parseInt(Math.random()*icons_users.length)],
-			user_comment: this.state.comment_to_add,
+		// check comment
+		if(this.state.comment_to_add != null) {
+
+			// check user name
+			if(this.state.user_name_comment != null) {
+
+				const comment = {
+
+					user: this.state.user_name_comment,
+					user_image: icons_users[parseInt(Math.random()*icons_users.length)],
+					user_comment: this.state.comment_to_add,
+
+				}
+
+				// console.log(comment);
+
+				// add data to database
+				fs.collection('posts').doc(document_id).update({
+
+					// user_comment: this.state.post,
+					comments: firebase.firestore.FieldValue.arrayUnion(comment),
+					// user_image: icons_users[parseInt(Math.random()*icons_users.length)],
+
+				}).then( ref => {
+
+					console.log("Added document")
+					window.location.reload();
+				})
+
+			}
+
+			// if user name is null
+			else {
+
+				alert("Ups, It's like you did not add your name in the comment, please add one!")
+
+			}
 
 		}
 
-		// add data to database
-		fs.collection('posts').doc(document_id).update({
+		else {
 
-			// user_comment: this.state.post,
-			comments: firebase.firestore.FieldValue.arrayUnion(comment),
-			// user_image: icons_users[parseInt(Math.random()*icons_users.length)],
+			alert("Ups, It's like you did not add a comment, please add one!")
 
-		}).then( ref => {
-
-			console.log("Added document")
-			window.location.reload();
-		})
+		}
 
 	}
 
@@ -68,73 +103,114 @@ export default class Post extends Component {
 
 		return (
 
-			<div className = "container border rounded shadow-sm my-3 p-4">
+			<Card style = {{marginTop: 50}}>
 
-				<div className="media">
+				<CardContent>
 
-					<img width="30" height="30" src = {post.user_image}  className="mr-3" alt="user image"/>
+					<Container>
 
-					<div className="media-body">
+						<Grid container spacing={3}>
 
-						<h5 className ="mt-0">{post.user}</h5>
+							<Grid item xs={1}>
 
-						{post.user_comment}
+								<img width="30" height="30" src = {post.user_image} alt="user image"/>
 
-					</div>
+							</Grid>
 
-				</div>
+							<Grid item xs={11}>
 
-				<p>
+								<Typography gutterBottom variant="h5" component="h2">
 
-					<img 
-						src = {post.image} 
-						width="500" 
-						height="auto"
-						// style = {widht: '10%', height: '100%'}
-						className="rounded mx-auto d-block img-fluid"
+									{post.user}
 
-					/>
+								</Typography>
 
-				</p>
+							</Grid>
 
-				<div className = 'container'>
+						</Grid>
 
-					{post.comments.length > 0 && post.comments.map( (comment, idx) => {
+						<Typography variant="body2" color="textSecondary" component="p" style = {{padding: 10}}>
 
-						return(
+							{post.user_comment}
 
-							<Comment_on_Post comment = {comment} key = {idx}/>
+						</Typography>
 
-							)
+					</Container>
 
-					})}
+					<CardMedia
+						element= "container"
+			          // className={classes.media}
+			          image = {post.image}
+			          style = {{
+			          	height: "500px",
+			          	// maxHeight:"50%", 
+			          	// maxWidth: "50%", 
+			          	margin: 15
+			          }}
+			          title= {post.user}
+			        />
 
-					<div className = "container form-group m-3">
+					<Container>
 
-						<input 
-							placeholder = "Add comment" 
-							className = "form-control" 
-							onChange = {
-								(comment_to_add) => {
+						{post.comments.length > 0 && post.comments.map( (comment, idx) => {
 
-									this.setState({comment_to_add: comment_to_add.target.value})
+							return(
 
+								<Comment_on_Post comment = {comment} key = {idx}/>
+
+								)
+
+						})}
+
+						<Container className = "container form-group m-3">
+
+							<TextField 
+								placeholder = "Add comment" 
+								fullWidth
+								style={{ margin: 8 }}
+								variant="outlined"
+								margin = 'normal'
+								// className = "form-control" 
+								onChange = {
+									(comment_to_add) => {
+
+										this.setState({comment_to_add: comment_to_add.target.value})
+
+									}
 								}
-							}
-							value = {this.state.comment_to_add}
-						/>
+								value = {this.state.comment_to_add}
+							/>
 
-						<button className="btn btn-primary m-3" type = "button" onClick={() => this.on_add_comment(post.doc_id)}>
+							<TextField 
+								placeholder = "Your name" 
+								fullWidth
+								style={{ margin: 8 }}
+								variant="outlined"
+								margin = 'normal'
+								// className = "form-control" 
+								onChange = {
+									(user_name_comment) => {
 
-							Add comment 
+										this.setState({user_name_comment: user_name_comment.target.value})
 
-						</button>
+									}
+								}
+								value = {this.state.user_name_comment}
+							/>
 
-					</div>
-				</div>
+							<Button variant="contained" color="primary" onClick={() => this.on_add_comment(post.doc_id)}>
 
+								Add comment 
 
-	    	</div>
+							</Button>
+
+						</Container>
+
+					</Container>
+
+				</CardContent>
+
+	    	</Card>
 
     	)
 

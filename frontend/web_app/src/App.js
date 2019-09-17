@@ -8,58 +8,70 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from "./screens/home.screen";
 import Login from "./screens/login.screen";
 
-import CssBaseline from '@material-ui/core/CssBaseline';
+// Material ui
+// import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar';
+// import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+// import { makeStyles } from '@material-ui/core/styles';
+
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+// import { MuiThemeProvider } from '@material-ui/core/styles';
+import theme from './material-ui/theme';
+
 // import Piece_of_Ground_Map from "./components/piece_of_ground_map.component";
 // import Contact from './components/contact.component';
 // import Questions_Answers from './components/questions_answers.component';
 
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//     flexGrow: 1,
+//   },
+//   menuButton: {
+//     marginRight: theme.spacing(2),
+//   },
+//   title: {
+//     flexGrow: 1,
+//   },
+// }));
+
 // Component 
 class App extends Component {
+
 
   // render method
   render() {
 
     return (
 
-      <React.Fragment>
+      <MuiThemeProvider theme={theme}>
 
-        <CssBaseline />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 
         <Router>
 
-          <div className="container">
+          <AppBar position="static">
 
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <Toolbar>
 
-              <Link to="/" className="navbar-brand"> 
+              <Typography gutterBottom variant="h4" component="h2">
 
                 Programmers Social Network
 
-              </Link>
+              </Typography>
 
-              <div className="collpase navbar-collapse">
+            </Toolbar>
 
-                <ul className="navbar-nav mr-auto">
-
-                  <li className="navbar-item">
-
-                  
-                  </li>
-
-                </ul>
-
-              </div>
-
-            </nav>
-
-          </div>
+          </AppBar>
 
           <Route path = "/" exact component = {Login} />
           <Route path = "/home" exact component = {Home} />
 
         </Router>
 
-      </React.Fragment>
+      </MuiThemeProvider>
 
     );
 

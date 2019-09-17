@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import Post from "./post.component";
 
+// material ui
+import Container from '@material-ui/core/Container';
+
 export default class Posts extends Component {
 
 	render() {
 
 		return (
 
-			<div className = "container">
+			<Container>
 
 				{this.props.posts.map( (post, idx) => 
 
@@ -15,7 +18,7 @@ export default class Posts extends Component {
 
 				)}
 
-	        </div>
+	        </Container>
         )
 
 	}
