@@ -8,4 +8,6 @@ export const icons_users = [
 	"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVMvL427OzvfmwIN3bwxnnnm4WcTpIhgc1mRC7IuWsjZUr2EIi",
 	"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKBYpWV-fme6cx198UFWztQSNMhasKmHEFlP0BrzXBxHWN8QOR",
 
-]
+];
+
+// export const survey_link = "https://forms.gle/8iKf572YwAgsm6Pq6";

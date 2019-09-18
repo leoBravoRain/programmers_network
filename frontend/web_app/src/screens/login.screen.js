@@ -63,7 +63,7 @@ export default class Login extends Component {
 					container
 					alignItems="center"
 				 	justify="center"
-				 	// spacing={100}
+				 	direction = "column"
 				>
 
 					<Typography variant="body2" color="textSecondary" component="p" style = {{padding: 10}}>
@@ -73,29 +73,11 @@ export default class Login extends Component {
 
 					</Typography>
 
-				</Grid>
-
-				<Grid 
-					container
-					alignItems="center"
-				 	justify="center"
-				 	// spacing={100}
-				>
-
 					<Typography variant="body2" color="textSecondary" component="p" style = {{padding: 10}}>
 
 						It's like an Instagram but for programmers! 
 
 					</Typography>
-
-				</Grid>
-
-				<Grid 
-					container
-					alignItems="center"
-				 	justify="center"
-				 	// spacing={100}
-				>
 
 			      	<Typography variant="body2" color="textSecondary" component="p" style = {{padding: 10}}>
 
@@ -104,7 +86,7 @@ export default class Login extends Component {
 					</Typography>
 
 				</Grid>
-				
+
 				<Grid 
 					container
 					alignItems="center"
@@ -129,7 +111,7 @@ export default class Login extends Component {
 
 				<Grid
 					container
-					// container
+					direction = "column"
 					alignItems="center"
 				 	justify="center"
 				>
@@ -139,6 +121,12 @@ export default class Login extends Component {
 			        I am a programmer
 
 		      	</Button>
+
+      			<Button size = "small" variant="contained" color="secondary" onClick={()=> window.open("https://forms.gle/8iKf572YwAgsm6Pq6")}>
+
+      		        Send my opinion to developers
+
+      	      	</Button>
 
 
 		      	</Grid>

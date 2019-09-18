@@ -7,6 +7,7 @@ import "firebase/firestore";
 import New_Post from "../components/new_post.component";
 import icons_users from "constants";
 import Posts from "../components/posts.component";
+import Survey_for_users from "../components/survey_for_users.component";
 
 // material ui
 import Container from '@material-ui/core/Container';
@@ -135,11 +136,15 @@ export default class Home extends Component {
 
         return (
 
-        	<Container>	
+        	<Container>		
+
+        		<Survey_for_users />
 
 	            <New_Post/>
 
 	            <Posts posts = {this.state.posts} />
+
+	            <Survey_for_users />
 
            	</Container>
 
