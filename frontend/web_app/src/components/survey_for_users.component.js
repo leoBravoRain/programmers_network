@@ -9,7 +9,14 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
+
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 // import { spacing } from '@material-ui/system';
 // import Icon from '@material-ui/core/Icon';
 
@@ -45,33 +52,46 @@ export default class Login extends Component {
 
 		return (
 
-			<Paper style = {{padding: 5, marginTop: 20}}>
+			// <Paper style = {{padding: 5, marginTop: 20}}>
 
 
 				<Grid 
 					container
 					direction = "column"
 					// maxWidth="m" 
-					// style = {{marginTop: 0}}
+					style = {{marginTop: 20}}
 					alignItems="center"
 				 	justify="center"
 
 				>	
-						<Typography gutterBottom variant="h6" component="h6">
 
-							We would love to know your opinion about this project!
+					<ExpansionPanel>
 
-						</Typography>
+				        <ExpansionPanelSummary
+				          expandIcon={<ExpandMoreIcon />}
+				          aria-controls="panel1a-content"
+				          id="panel1a-header"
+				        >
 
-		      			<Button size = "small" variant="contained" color="secondary" onClick={()=> window.open("https://forms.gle/8iKf572YwAgsm6Pq6")}>
+				          	<Typography variant="h6" component="h6">
 
-		      		        Send my anonymous opinion to developers
+				          		Send my anonymous opinion to developers
 
-		      	      	</Button>
+			          		</Typography>
+
+				        </ExpansionPanelSummary>
+
+				        <ExpansionPanelDetails>
+				          
+							<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeg95b4RWQID2_x91UAIb4kQRgg7p7qT-Oh46wS3oDkwXu15w/viewform?embedded=true" width="640" height="511" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+
+				        </ExpansionPanelDetails>
+
+				      </ExpansionPanel>
 
 				</Grid>
 
-      	    </Paper>
+      	    // </Paper>
 
 		);
 

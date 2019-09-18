@@ -3,6 +3,7 @@ import React, { Component } from "react";
 // import { Redirect } from 'react-router-dom'
 // import {fs, st} from "../config/firebase";
 // import icons_users from "constants";
+import Survey_for_users from "../components/survey_for_users.component";
 
 // material ui
 import Container from '@material-ui/core/Container';
@@ -116,21 +117,13 @@ export default class Login extends Component {
 				 	justify="center"
 				>
 
-				<Button variant="contained" color="primary" onClick={this.handle_login}>
+					<Button variant="contained" color="primary" onClick={this.handle_login}>
 
-			        I am a programmer
+				        I am a programmer
 
-		      	</Button>
-
-      			<Button size = "small" variant="contained" color="secondary" onClick={()=> window.open("https://forms.gle/8iKf572YwAgsm6Pq6")}>
-
-      		        Send my opinion to developers
-
-      	      	</Button>
-
+			      	</Button>
 
 		      	</Grid>
-
 
 			</Grid>
 
