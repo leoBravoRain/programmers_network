@@ -3,6 +3,7 @@ import Post from "./post.component";
 
 // material ui
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 
 export default class Posts extends Component {
 
@@ -10,7 +11,14 @@ export default class Posts extends Component {
 
 		return (
 
-			<Container>
+			<Grid 
+				container
+				// maxWidth="m" 
+				style = {{marginTop: 30}}
+				alignItems="center"
+			 	justify="center"
+
+			>
 
 				{this.props.posts.map( (post, idx) => 
 
@@ -18,7 +26,7 @@ export default class Posts extends Component {
 
 				)}
 
-	        </Container>
+	        </Grid>
         )
 
 	}

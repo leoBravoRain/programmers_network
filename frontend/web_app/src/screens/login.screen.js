@@ -47,10 +47,9 @@ export default class Login extends Component {
 			<Grid 
 				container
 				// maxWidth="m" 
-				style = {{margin: 20, textAlign: 'center'}}
+				style = {{marginTop: 30, textAlign: 'center'}}
 				alignItems="center"
 			 	justify="center"
-
 
 			>
 
@@ -60,6 +59,52 @@ export default class Login extends Component {
 
 				</Typography>
 
+				<Grid 
+					container
+					alignItems="center"
+				 	justify="center"
+				 	// spacing={100}
+				>
+
+					<Typography variant="body2" color="textSecondary" component="p" style = {{padding: 10}}>
+
+						Here you can share your daily life things related with programming,
+						like your ideas or your achievements, and getting feedback from community !
+
+					</Typography>
+
+				</Grid>
+
+				<Grid 
+					container
+					alignItems="center"
+				 	justify="center"
+				 	// spacing={100}
+				>
+
+					<Typography variant="body2" color="textSecondary" component="p" style = {{padding: 10}}>
+
+						It's like an Instagram but for programmers! 
+
+					</Typography>
+
+				</Grid>
+
+				<Grid 
+					container
+					alignItems="center"
+				 	justify="center"
+				 	// spacing={100}
+				>
+
+			      	<Typography variant="body2" color="textSecondary" component="p" style = {{padding: 10}}>
+
+						Feel free to be geek!
+
+					</Typography>
+
+				</Grid>
+				
 				<Grid 
 					container
 					alignItems="center"
@@ -80,11 +125,7 @@ export default class Login extends Component {
 
 				</Grid>
 
-				<Typography variant="body2" color="textSecondary" component="p" style = {{padding: 10}}>
-
-					Here you can share all your achievements, doubts or ideas with all the community of programmers, getting the best feedback from them! Happy coding!
-
-				</Typography>
+				
 
 				<Grid
 					container
@@ -99,7 +140,9 @@ export default class Login extends Component {
 
 		      	</Button>
 
+
 		      	</Grid>
+
 
 			</Grid>
 
