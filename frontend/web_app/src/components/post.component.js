@@ -137,18 +137,30 @@ export default class Post extends Component {
 
 					</Container>
 
-					<CardMedia
-						element= "container"
-			          // className={classes.media}
-			          image = {post.image}
-			          style = {{
-			          	height: "500px",
-			          	// maxHeight:"50%", 
-			          	// maxWidth: "50%", 
-			          	margin: 15
-			          }}
-			          title= {post.user}
-			        />
+					<Grid 
+						container 
+						// spacing={10}
+						alignItems="center"
+  						justify="center"
+  						style = {{
+
+  							margin: 10,
+
+  						}}
+					>
+
+						<img 
+							src = {post.image}
+							style = {{
+
+								width: "60%",
+  								height: "auto"
+
+							}}
+
+						/>
+
+					</Grid>
 
 					<Container>
 
